@@ -15,6 +15,6 @@
 	};
 </script>
 
-<li class="name text-3xl hover:text-[#d81b60]">
+<li class="name p-0 text-3xl hover:text-[#d81b60]">
 	<a class:active={$page.url.pathname === to} href={to || '#'} on:click={handleClick}>{title}</a>
 </li>
