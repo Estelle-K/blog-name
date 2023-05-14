@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Raleway:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+	font-family: 'Raleway', sans-serif;
+
+	/* background-image: url('$lib/assets/images/background.svg'),
+		linear-gradient(rgb(20, 20, 20), rgb(87, 49, 89));
+	background-repeat: no-repeat;
+	height: 100vh; */
+}
+
+.name {
+	font-family: 'Caveat', cursive;
+}
+
+/* Pink Light scheme (Default) */
+/* Can be forced with data-theme="light" */
+[data-theme='light'],
+:root:not([data-theme='dark']) {
+	--primary: #d81b60;
+	--primary-hover: #c2185b;
+	--primary-focus: rgba(216, 27, 96, 0.125);
+	--primary-inverse: #fff;
+}
+
+/* Pink Dark scheme (Auto) */
+/* Automatically enabled if user has Dark mode enabled */
+@media only screen and (prefers-color-scheme: dark) {
+	:root:not([data-theme]) {
+		--primary: #d81b60;
+		--primary-hover: #e91e63;
+		--primary-focus: rgba(216, 27, 96, 0.25);
+		--primary-inverse: #fff;
+	}
+}
+
+/* Pink Dark scheme (Forced) */
+/* Enabled if forced with data-theme="dark" */
+[data-theme='dark'] {
+	--primary: #d81b60;
+	--primary-hover: #e91e63;
+	--primary-focus: rgba(216, 27, 96, 0.25);
+	--primary-inverse: #fff;
+}
+
+/* Pink (Common styles) */
+:root {
+	--form-element-active-border-color: var(--primary);
+	--form-element-focus-color: var(--primary-focus);
+	--switch-color: var(--primary-inverse);
+	--switch-checked-background-color: var(--primary);
+}

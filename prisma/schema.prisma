@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  reviewFeatures = ["jsonProtocol"]
+}
+
+datasource db {
+  provider = "mysql"
+  url = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model User {
+  id            String   @id @default(cuid())
+  name          String
+  createdAt     DateTime @default(now())
+  email         String   @unique
+  passwordHash  String
+
+  updatedPosts   Post[]
+  updatedLabels  Label[]
+}
+
+model Post {
+  id            String   @id @default(cuid())
+  title         String   @db.VarChar(200)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  introduction  String   @db.MediumText
+  content       String   @db.LongText
+  published     Boolean  @default(false)
+  updatedByUserId String?
+
+  labels        Label[]
+  updatedBy User? @relation(fields: [updatedByUserId], references: [id])
+  @@index([updatedByUserId])
+}
+
+model Label {
+  id            String   @id @default(cuid())
+  name          String   @unique
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  updatedByUserId String?
+  
+  posts         Post[] 
+  updatedBy User? @relation(fields: [updatedByUserId], references: [id])
+  @@index([updatedByUserId])
+}
